@@ -21,6 +21,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatCardModule } from "@angular/material/card";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from "@angular/material/button";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -30,9 +31,9 @@ import { MatButtonModule } from "@angular/material/button";
     NavComponent,
     HomeComponent,
     ProductCrudComponent,
+    ProductCreateComponent,
     RedDirective,
     ForDirective,
-    ProductCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +44,7 @@ import { MatButtonModule } from "@angular/material/button";
     MatListModule,
     MatCardModule,
     MatButtonModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
