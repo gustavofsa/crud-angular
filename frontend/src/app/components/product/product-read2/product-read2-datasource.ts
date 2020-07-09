@@ -1,37 +1,32 @@
-import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
-
-// TODO: Replace this with your own data model type
-export interface ProductRead2Item {
-  name: string;
-  id: number;
-}
+import { DataSource } from "@angular/cdk/collections";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { map } from "rxjs/operators";
+import { Observable, of as observableOf, merge } from "rxjs";
+import { Product } from "../product.model";
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: ProductRead2Item[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
+const EXAMPLE_DATA: Product[] = [
+  { id: 1, name: "Hydrogen", price: 29.99 },
+  { id: 2, name: "Helium", price: 29.99 },
+  { id: 3, name: "Lithium", price: 29.99 },
+  { id: 4, name: "Beryllium", price: 29.99 },
+  { id: 5, name: "Boron", price: 29.99 },
+  { id: 6, name: "Carbon", price: 29.99 },
+  { id: 7, name: "Nitrogen", price: 29.99 },
+  { id: 8, name: "Oxygen", price: 29.99 },
+  { id: 9, name: "Fluorine", price: 29.99 },
+  { id: 10, name: "Neon", price: 29.99 },
+  { id: 11, name: "Sodium", price: 29.99 },
+  { id: 12, name: "Magnesium", price: 29.99 },
+  { id: 13, name: "Aluminum", price: 29.99 },
+  { id: 14, name: "Silicon", price: 29.99 },
+  { id: 15, name: "Phosphorus", price: 29.99 },
+  { id: 16, name: "Sulfur", price: 29.99 },
+  { id: 17, name: "Chlorine", price: 29.99 },
+  { id: 18, name: "Argon", price: 29.99 },
+  { id: 19, name: "Potassium", price: 29.99 },
+  { id: 20, name: "Calcium", price: 29.99 },
 ];
 
 /**
@@ -39,8 +34,8 @@ const EXAMPLE_DATA: ProductRead2Item[] = [
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ProductRead2DataSource extends DataSource<ProductRead2Item> {
-  data: ProductRead2Item[] = EXAMPLE_DATA;
+export class ProductRead2DataSource extends DataSource<Product> {
+  data: Product[] = EXAMPLE_DATA;
   paginator: MatPaginator;
   sort: MatSort;
 
@@ -53,18 +48,20 @@ export class ProductRead2DataSource extends DataSource<ProductRead2Item> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<ProductRead2Item[]> {
+  connect(): Observable<Product[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
       observableOf(this.data),
       this.paginator.page,
-      this.sort.sortChange
+      this.sort.sortChange,
     ];
 
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+    return merge(...dataMutations).pipe(
+      map(() => {
+        return this.getPagedData(this.getSortedData([...this.data]));
+      })
+    );
   }
 
   /**
@@ -77,7 +74,7 @@ export class ProductRead2DataSource extends DataSource<ProductRead2Item> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: ProductRead2Item[]) {
+  private getPagedData(data: Product[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -86,17 +83,20 @@ export class ProductRead2DataSource extends DataSource<ProductRead2Item> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: ProductRead2Item[]) {
-    if (!this.sort.active || this.sort.direction === '') {
+  private getSortedData(data: Product[]) {
+    if (!this.sort.active || this.sort.direction === "") {
       return data;
     }
 
     return data.sort((a, b) => {
-      const isAsc = this.sort.direction === 'asc';
+      const isAsc = this.sort.direction === "asc";
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
+        case "name":
+          return compare(a.name, b.name, isAsc);
+        case "id":
+          return compare(+a.id, +b.id, isAsc);
+        default:
+          return 0;
       }
     });
   }
