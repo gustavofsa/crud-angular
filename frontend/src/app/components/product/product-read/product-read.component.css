@@ -10,4 +10,5 @@ a.edit {
 a.delete {
   color: #e35e6b;
   margin-left: 10px;
+  cursor: pointer;
 }
