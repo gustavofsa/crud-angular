@@ -1,0 +1,8 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+button.delete {
+  margin-right: 10px;
+}
