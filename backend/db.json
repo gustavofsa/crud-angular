@@ -1,19 +1,34 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Caneta BIC Preta",
-      "price": 5.89
-    },
-    {
       "id": 2,
       "name": "Apple Macbook Pro",
       "price": 12000.89
     },
     {
       "id": 3,
-      "name": "Samsung S20+",
-      "price": 5000.89
+      "name": "Samsung S20+ Ultra",
+      "price": "7520.89"
+    },
+    {
+      "name": "Lapis Preto Básico",
+      "price": "1.50",
+      "id": 4
+    },
+    {
+      "name": "Fones de ouvido JBL",
+      "price": 129.9,
+      "id": 5
+    },
+    {
+      "name": "Geladeira",
+      "price": "1980.44",
+      "id": 7
+    },
+    {
+      "name": "produto teste",
+      "price": "12.59",
+      "id": 8
     }
   ]
 }
